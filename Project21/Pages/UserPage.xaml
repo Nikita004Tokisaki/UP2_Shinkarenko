@@ -1,0 +1,67 @@
+﻿<Page x:Class="Project21.Pages.UserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Пользователь" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель поиска и фильтрации (Шаг 12) -->
+        <WrapPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Поиск по Ф.И.О.:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="TextBoxSearch" Width="200" Margin="5" TextChanged="TextBoxSearch_TextChanged" ToolTip="Введите ФИО для поиска"/>
+
+            <TextBlock Text="Сортировка:" VerticalAlignment="Center" Margin="15,5,5,5"/>
+            <ComboBox x:Name="CmbSorting" Width="150" Margin="5" SelectionChanged="CmbSorting_SelectionChanged" ToolTip="Выберите сортировку">
+                <ComboBoxItem Content="По возрастанию"/>
+                <ComboBoxItem Content="По убыванию"/>
+            </ComboBox>
+
+            <CheckBox x:Name="CheckDriver" Content="Только пользователи" VerticalAlignment="Center" Margin="15,5,10,5" Checked="CheckDriver_Changed" Unchecked="CheckDriver_Changed" ToolTip="Фильтр по роли"/>
+
+            <Button Content="Очистить фильтр" Width="150" Margin="5" Click="ButtonClearFilter_Click" ToolTip="Сбросить все фильтры"/>
+        </WrapPanel>
+
+        <!-- Список в виде плитки (Шаг 11) -->
+        <ListView x:Name="ListUser" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Center">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="300"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- ФИО (шрифт 18, полужирный, по центру) -->
+                        <TextBlock VerticalAlignment="Center" TextAlignment="Center" Width="250" Grid.Row="0" TextWrapping="Wrap" Text="{Binding FIO}" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+
+                        <!-- Картинка (с заглушкой и поддержкой путей) -->
+                        <Border Grid.Row="1" Width="250" Height="300" Background="#EEEEEE" HorizontalAlignment="Center">
+                            <Image Stretch="Uniform">
+                                <Image.Source>
+                                    <Binding Path="Photo" StringFormat="file:///{0}">
+                                        <Binding.TargetNullValue>
+                                            <ImageSource>/Resources/DefaultPhoto.png</ImageSource>
+                                        </Binding.TargetNullValue>
+                                    </Binding>
+                                </Image.Source>
+                            </Image>
+                        </Border>
+
+                        <!-- Роль (шрифт 18, по левому краю) -->
+                        <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="250" Grid.Row="2" HorizontalAlignment="Center" FontSize="18" Text="{Binding Role}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

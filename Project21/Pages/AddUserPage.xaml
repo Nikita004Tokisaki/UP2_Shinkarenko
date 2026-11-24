@@ -1,0 +1,40 @@
+﻿<Page x:Class="Project21.Pages.AddUserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Добавление/Редактирование" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Поля ввода, привязанные к свойствам объекта User -->
+        <TextBlock Text="Логин" Grid.Row="0" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center"/>
+        <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" ToolTip="Введите логин"/>
+
+        <TextBlock Text="Пароль" Grid.Row="1" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center"/>
+        <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" ToolTip="Введите пароль"/>
+
+        <TextBlock Text="Роль" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox x:Name="cmbRole" SelectedItem="{Binding Role}" Grid.Row="2" Grid.Column="1" ToolTip="Выберите роль">
+            <ComboBoxItem Content="Администратор"/>
+            <ComboBoxItem Content="Пользователь"/>
+        </ComboBox>
+
+        <TextBlock Text="ФИО" Grid.Row="3" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center"/>
+        <TextBox Text="{Binding FIO, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" ToolTip="Введите ФИО"/>
+
+        <TextBlock Text="Фото (путь)" Grid.Row="4" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center"/>
+        <TextBox Text="{Binding Photo, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" ToolTip="Укажите путь к фото"/>
+
+        <Button Content="Сохранить" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,0,50,0" Click="ButtonSave_Click" ToolTip="Сохранить изменения"/>
+    </Grid>
+</Page>
